@@ -1,0 +1,1 @@
+demo of creating a web side that is integrated with AJAX
