@@ -1,11 +1,14 @@
 {
   "name": "ajax",
   "version": "1.0.0",
-  "description": "",
+  "description": "demo of creating a web side that is integrated with AJAX",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.0.0"
+  }
 }
