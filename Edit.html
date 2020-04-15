@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Edit TODO List</title>
+</head>
+<body>
+    <ul id="todo-list"></ul>
+    <button><a href="./index.html">Go back to homepage</a></button>
+    <button><a href="./Add.html">Add to TODO List</a></button>
+    <script>
+        let url = 'http://localhost:9081/todos';
+        let todoList = [];
+        let itemList = document.getElementById('todo-list');
+            itemList.addEventListener('click', onDeleteClick);
+        axios.get(url).then((response) => {
+            todoList = response.data;
+            display(todoList);
+        });
+
+        function onDeleteClick(event){
+            let button = event.target;
+            let id = button.dataset.id;
+            axios.delete(url+ '/' + id).then((response) => {
+                display(response.data);
+            });
+        }
+        
+        function display(items){
+            let contentToDisPlay = items
+                                .map((x) => '<li>' + x.content + ' <button data-id ="'+ x.id +'">Delete</button></li>');
+            itemList.innerHTML = contentToDisPlay.join('');
+        }
+
+    </script>
+</body>
+</html>

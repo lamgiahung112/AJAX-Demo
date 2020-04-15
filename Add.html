@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to TODO List</title>
+</head>
+<body>
+    <input type="text" id="new-item">
+    <button id="add-btn">Add</button>
+    <button id="homepage">Go back to homepage</button>
+    <ul id="log"></ul>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let DbURL = 'http://localhost:9081/todos';
+        let addBtn = document.getElementById('add-btn');
+            addBtn.addEventListener('click',addToDB);
+
+        let input = document.getElementById('new-item');
+        
+        let homePageBtn = document.getElementById('homepage');
+            homePageBtn.innerHTML = '<a href="./index.html">Go back to homepage</a>';
+
+        function addToDB(){
+            let content = {content: input.value};
+            axios.post(DbURL,content);
+            writeLog();
+        }
+
+        function writeLog(){
+            let log = document.getElementById('log');
+            let logContent = input.value;
+            input.value = "";
+            log.innerHTML += '<li>Added ' + logContent + ' </li>'; 
+        }
+    </script>
+</body>
+</html>

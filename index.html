@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO List</title>
+</head>
+<body>
+    <ul id = "todo-list"></ul>
+    <button id="edit-btn">Edit</button>
+    <button id = "add-btn">ADD</button>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var url = "http://localhost:9081/todos";
+        let editBtn = document.getElementById('edit-btn');
+            editBtn.innerHTML = '<a href="./Edit.html" target="_blank">Edit</a>'
+        let addBtn = document.getElementById('add-btn');
+            addBtn.innerHTML = '<a href="./Add.html" target="_blank">Add</a>'
+
+        axios.get(url).then((response) => {
+            let items = response.data;
+            render(items);
+        });
+
+        function render(items){
+            let htmlList = document.getElementById('todo-list');
+            let content = items.map((item,index) => '<li>' + item.content + '</li>');
+            htmlList.innerHTML = content.join('');
+        }
+    </script>
+</body>
+</html>
